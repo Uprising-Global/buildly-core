@@ -108,19 +108,22 @@ class CoreUserWritableSerializer(CoreUserSerializer):
     Override default CoreUser serializer for writable actions (create, update, partial_update)
     """
     password = serializers.CharField(write_only=True)
-    organization_name = serializers.CharField(source='organization.name')
     core_groups = serializers.PrimaryKeyRelatedField(many=True, queryset=CoreGroup.objects.all(), required=False)
 
     class Meta:
         model = CoreUser
-        fields = CoreUserSerializer.Meta.fields + ('password', 'organization_name')
+        fields = CoreUserSerializer.Meta.fields + ('password')
         read_only_fields = CoreUserSerializer.Meta.read_only_fields
 
     def create(self, validated_data):
         # get or create organization
         organization = validated_data.pop('organization')
 
-        org_name = organization['name']
+        if organization:
+            org_name = organization['name']
+        else:
+            org_name = settings.DEFAULT_ORG
+
         organization, is_new_org = Organization.objects.get_or_create(name=str(org_name).lower())
 
         core_groups = validated_data.pop('core_groups', [])
@@ -141,7 +144,7 @@ class CoreUserWritableSerializer(CoreUserSerializer):
         coreuser.save()
 
         # check whether org_name is "default"
-        if org_name in ['default']:
+        if org_name in [str(settings.DEFAULT_ORG).lower()]:
             default_org_user = CoreGroup.objects.filter(organization__name=settings.DEFAULT_ORG,
                                                         is_org_level=True,
                                                         permissions=PERMISSIONS_VIEW_ONLY).first()

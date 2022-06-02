@@ -30,6 +30,7 @@ services:
     environment:
       DJANGO_SETTINGS_MODULE: "buildly.settings.production"
       ALLOWED_HOSTS: "*"
+      CORS_ORIGIN_ALLOW_ALL: "True"
       CORS_ORIGIN_WHITELIST: "*"
       DATABASE_ENGINE: "postgresql"
       DATABASE_NAME: "buildly"
@@ -37,8 +38,8 @@ services:
       DATABASE_PASSWORD: "root"
       DATABASE_HOST: "postgres_buildly"
       DATABASE_PORT: "5432"
-      DEFAULT_ORG: "Default Organization"
-      AUTO_APPROVE_USER: "False"
+      DEFAULT_ORG: "Uprising"
+      AUTO_APPROVE_USER: "True"
       JWT_ISSUER: "buildly"
       JWT_PRIVATE_KEY_RSA_BUILDLY: |-
         -----BEGIN RSA PRIVATE KEY-----
@@ -68,11 +69,6 @@ services:
       USE_PASSWORD_COMMON_VALIDATOR: "True"
       USE_PASSWORD_NUMERIC_VALIDATOR: "True"
       FRONTEND_URL: "http://localhost:3000/"
-      SOCIAL_AUTH_GITHUB_REDIRECT_URL: "http://localhost:3000/"
-      SOCIAL_AUTH_GITHUB_KEY: "25fc5ab2bdfca0e70c63"
-      SOCIAL_AUTH_GITHUB_SECRET: "ff981a6390929445153092d0dbbf4a507c0ecf8b"
-      # SOCIAL_AUTH_CLIENT_ID: "vBn4KsOCthm7TWzMH0kVV0dXkUPJEtOQwaLu0eoC"
-      # SOCIAL_AUTH_CLIENT_SECRET: "0aYDOHUNAxK4MjbnYOHhfrKx8Ezj3jd7aKq2C7yRDZ6FbAL4SgRFxY8N6GbB6IGyCgpT6pmQ5pEVJmH7mIEUJxyXKbta7ebxULLULjXwnJYGhUgT2hPyCfptkWFhsZVV"
       EMAIL_HOST: "smtp.sendgrid.net"
       EMAIL_HOST_USER: "apikey"
       EMAIL_HOST_PASSWORD: "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"
