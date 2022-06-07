@@ -21,6 +21,7 @@ router.register(r'oauth/applications', views.ApplicationViewSet)
 router.register(r'oauth/refreshtokens', views.RefreshTokenViewSet)
 router.register(r'organization', views.OrganizationViewSet)
 router.register(r'logicmodule', views.LogicModuleViewSet)
+router.register(r'subscriber', views.SubscriberViewSet)
 
 
 urlpatterns = [

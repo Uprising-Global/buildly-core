@@ -260,3 +260,16 @@ class LogicModule(models.Model):
 
     def __str__(self):
         return str(self.name)
+
+
+class Subscriber(models.Model):
+    subscriber_uuid = models.CharField(primary_key=True, max_length=255, verbose_name='Subscriber UUID', default=uuid.uuid4, unique=True)
+    email = models.EmailField(verbose_name='Subscriber Email', blank=False, null=False)
+
+    class Meta:
+        ordering = ('email',)
+        verbose_name = "Uprising Subscriber"
+        verbose_name_plural = "Uprising Subscribers"
+
+    def __str__(self):
+        return self.email

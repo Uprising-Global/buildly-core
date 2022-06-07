@@ -9,9 +9,6 @@ from rest_framework.response import Response
 import django_filters
 import jwt
 from drf_yasg.utils import swagger_auto_schema
-from django.http import Http404
-from rest_framework.views import APIView
-from rest_framework.permissions import AllowAny
 
 from core.models import CoreUser, Organization
 from core.serializers import (CoreUserSerializer, CoreUserWritableSerializer, CoreUserInvitationSerializer,
@@ -279,7 +276,7 @@ class CoreUserViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin,
         serializer.save()
         return Response(serializer.data)
 
-    @action(detail=False, methods=['patch'], name='Update Organization', url_path='update_org/(?P<pk>\d+)')
+    @action(detail=False, methods=['patch'], name='Update Organization', url_path=r'update_org/(?P<pk>\d+)')
     def update_info(self, request, pk=None, *args, **kwargs):
         """
         Update a user Organization

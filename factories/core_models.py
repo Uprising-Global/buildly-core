@@ -5,7 +5,8 @@ from core.models import (
     CoreUser as CoreUserM,
     CoreGroup as CoreGroupM,
     LogicModule as LogicModuleM,
-    Organization as OrganizationM
+    Organization as OrganizationM,
+    Subscriber as SubscriberM,
 )
 
 
@@ -44,3 +45,11 @@ class LogicModule(DjangoModelFactory):
 
     name = 'products'
     endpoint = 'http://products.example.com/'
+
+
+class Subscriber(DjangoModelFactory):
+    class Meta:
+        model = SubscriberM
+        django_get_or_create = ('email',)
+
+    email = 'test@test.com'

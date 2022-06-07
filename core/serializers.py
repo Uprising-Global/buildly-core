@@ -16,7 +16,7 @@ from oauth2_provider.models import AccessToken, Application, RefreshToken
 from core.email_utils import send_email, send_email_body
 
 from core.models import CoreUser, CoreGroup, EmailTemplate, LogicModule, Organization, PERMISSIONS_ORG_ADMIN, \
-    TEMPLATE_RESET_PASSWORD, PERMISSIONS_VIEW_ONLY
+    TEMPLATE_RESET_PASSWORD, PERMISSIONS_VIEW_ONLY, Subscriber
 
 
 class LogicModuleSerializer(serializers.ModelSerializer):
@@ -112,12 +112,12 @@ class CoreUserWritableSerializer(CoreUserSerializer):
 
     class Meta:
         model = CoreUser
-        fields = CoreUserSerializer.Meta.fields + ('password')
+        fields = CoreUserSerializer.Meta.fields + ('password',)
         read_only_fields = CoreUserSerializer.Meta.read_only_fields
 
     def create(self, validated_data):
         # get or create organization
-        organization = validated_data.pop('organization')
+        organization = validated_data.pop('organization', None)
 
         if organization:
             org_name = organization['name']
@@ -151,7 +151,7 @@ class CoreUserWritableSerializer(CoreUserSerializer):
             coreuser.core_groups.add(default_org_user)
 
         # check whether an old organization
-        if not is_new_org:
+        elif not is_new_org:
             coreuser.is_active = False
             coreuser.save()
 
@@ -161,7 +161,7 @@ class CoreUserWritableSerializer(CoreUserSerializer):
             coreuser.core_groups.add(org_user)
 
         # add org admin role to the user if org is new
-        if is_new_org:
+        elif is_new_org:
             group_org_admin = CoreGroup.objects.get(organization=organization,
                                                     is_org_level=True,
                                                     permissions=PERMISSIONS_ORG_ADMIN)
@@ -426,3 +426,12 @@ class CoreUserEmailNotificationSerializer(serializers.Serializer):
     """
     organization_uuid = serializers.UUIDField()
     notification_messages = serializers.CharField()
+
+
+class SubscriberSerializer(serializers.ModelSerializer):
+    id = serializers.UUIDField(source='subscriber_uuid', read_only=True)
+
+    class Meta:
+        model = Subscriber
+        fields = '__all__'
+        read_only_fields = ('subscriber_uuid',)
