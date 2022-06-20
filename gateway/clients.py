@@ -4,6 +4,7 @@ from typing import Any, Dict, Tuple
 
 import requests
 import aiohttp
+from django.conf import settings
 from django.http.request import QueryDict
 from bravado_core.spec import Spec
 from rest_framework.request import Request
@@ -40,7 +41,8 @@ class BaseSwaggerClient:
         if kwargs.get('pk') is None:
             path = f'/{model}/'
         else:
-            pk_name = 'uuid' if utils.valid_uuid4(pk) else 'id'
+            uuid_name = model.replace('-', '_') + '_uuid'
+            pk_name = uuid_name if utils.valid_uuid4(pk) else 'id'
             path_kwargs = {pk_name: pk}
             path = f'/{model}/{{{pk_name}}}/'
 
@@ -124,7 +126,8 @@ class SwaggerClient(BaseSwaggerClient):
                               headers=self.get_headers(),
                               params=self._in_request.query_params,
                               data=self.get_request_data(),
-                              files=self._in_request.FILES)
+                              files=self._in_request.FILES,
+                              verify=settings.SELF_SSL_BUNDLE)
         except Exception as e:
             error_msg = (f'An error occurred when redirecting the request to '
                          f'or receiving the response from the service.\n'
