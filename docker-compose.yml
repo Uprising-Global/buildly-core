@@ -78,6 +78,7 @@ services:
       EMAIL_BACKEND: "SMTP"
       DEFAULT_FROM_EMAIL: "admin@buildly.io"
       RESETPASS_CONFIRM_URL_PATH: "reset-password-confirm/"
+      SELF_SSL_BUNDLE: "/code/self-ssl-bundle.crt"
 
 volumes:
   static-content:

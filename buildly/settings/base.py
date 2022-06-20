@@ -194,6 +194,9 @@ SUPER_USER_PASSWORD = os.getenv('SUPER_USER_PASSWORD')
 DEFAULT_ORG = os.getenv('DEFAULT_ORG').lower() if os.getenv('DEFAULT_ORG') else None
 AUTO_APPROVE_USER = os.getenv('AUTO_APPROVE_USER', False)
 
+# SSL path setup
+SELF_SSL_BUNDLE = os.getenv('SELF_SSL_BUNDLE')
+
 # Swagger settings - for generate_swagger management command
 
 SWAGGER_SETTINGS = {

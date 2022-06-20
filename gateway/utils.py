@@ -7,6 +7,7 @@ import json
 import requests
 import logging
 
+from django.conf import settings
 from django.db import models
 from rest_framework.request import Request
 
@@ -67,7 +68,7 @@ def get_swagger_from_url(api_url: str):
     :return: dictionary representing the swagger definition
     """
     try:
-        return requests.get(api_url)
+        return requests.get(api_url, verify=settings.SELF_SSL_BUNDLE)
     except requests.exceptions.ConnectTimeout as error:
         raise TimeoutError(
             f'Connection timed out. Please, check that {api_url} is accessible.') from error
