@@ -78,8 +78,8 @@ class Command(BaseCommand):
                 su = CoreUser.objects.create_superuser(
                     first_name='System',
                     last_name='Admin',
-                    username='kAzjf9kBOk0y',
-                    email='admin@example.com',
+                    username='admin@buildly.io',
+                    email='admin@buildly.io',
                     password=user_password,
                     organization=self._default_org,
                 )
