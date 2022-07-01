@@ -65,9 +65,9 @@ class CoreUserViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin,
     def list(self, request, *args, **kwargs):
         # Use this queryset or the django-filters lib will not work
         queryset = self.filter_queryset(self.get_queryset())
-        if not request.user.is_global_admin:
-            organization_id = request.user.organization_id
-            queryset = queryset.filter(organization_id=organization_id)
+        # if not request.user.is_global_admin:
+        #     organization_id = request.user.organization_id
+        #     queryset = queryset.filter(organization_id=organization_id)
         serializer = self.get_serializer(
             instance=queryset, context={'request': request}, many=True)
         return Response(serializer.data)
