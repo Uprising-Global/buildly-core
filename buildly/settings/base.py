@@ -202,3 +202,16 @@ SELF_SSL_BUNDLE = os.getenv('SELF_SSL_BUNDLE')
 SWAGGER_SETTINGS = {
     'DEFAULT_INFO': 'gateway.urls.swagger_info',
 }
+
+from google.oauth2 import service_account
+
+CREDENTIALS_DICT = {
+    'type': 'service_account',
+    'token_uri': 'https://oauth2.googleapis.com/token',
+    'client_id': os.getenv('GCP_CLIENT_ID'),
+    'client_email': os.getenv('GCP_CLIENT_EMAIL'),
+    'private_key_id': os.getenv('GCP_PRIVATE_KEY_ID'),
+    'private_key': os.getenv('GCP_PRIVATE_KEY'),
+}
+GCP_PROJECT = os.getenv('GCP_PROJECT')
+GCP_CLOUD_STORAGE = os.getenv('GCP_CLOUD_STORAGE')

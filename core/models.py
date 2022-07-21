@@ -178,6 +178,7 @@ class CoreUser(AbstractUser):
     privacy_disclaimer_accepted = models.BooleanField(default=False)
     create_date = models.DateTimeField(default=timezone.now)
     edit_date = models.DateTimeField(null=True, blank=True)
+    avatar_url = models.CharField(null=True, blank=True, max_length=1023, verbose_name='User avatar')
 
     class Meta:
         ordering = ('first_name',)

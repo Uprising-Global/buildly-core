@@ -79,6 +79,40 @@ services:
       DEFAULT_FROM_EMAIL: "admin@buildly.io"
       RESETPASS_CONFIRM_URL_PATH: "reset-password-confirm/"
       SELF_SSL_BUNDLE: "/code/self-ssl-bundle.crt"
+      GCP_PROJECT: 'uprising-web'
+      GCP_CLIENT_ID: '114637864365214335773'
+      GCP_CLOUD_STORAGE: 'uprising-dev-bucket'
+      GCP_CLIENT_EMAIL: 'universal@uprising-web.iam.gserviceaccount.com'
+      GCP_PRIVATE_KEY_ID: '6dbde3b169294b9b16af1f85de7894c237b57c10'
+      GCP_PRIVATE_KEY: |-
+        -----BEGIN PRIVATE KEY-----
+        MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCzs3asO8/ZLKLW
+        4SFF05pSI3/P2h9H/+OFsIuuYMJ+EFckgF2mLCgWAFUISAOMJ/eUS8p986z3/HUJ
+        3V16UR+RDwGjgM4vhosaWCwFcpTLFrv/0TvxSREnfQ5Z/KZyX9pAEF+9gUyK11tr
+        RuzlBmQX9E4gSgtDEYC0h2ncDNGCb0zvRqd5+SS5NLg8PFMTsGsbF6/KiVWrc6ha
+        TrOZvUmLDJE0E9jg/YRhLpcWOAXVKo7vcpOoWftXyTMDNcczOcD/PYrcgsqbydhQ
+        wEhMNzz8tXuUfRL4QwN0q3YiDkDahXHdptbUgO/0CKkRzwvluigtsrP9KHlRbNBx
+        pwzmd/V3AgMBAAECggEANwjEVHUw75sK9/IUxZTLk1JJ53cu01cb8CqkbLA3gHIy
+        rfweMjEdybcqU5HyfC8VVLZtemtxUrVfhrjj0v0bRMqqvs9I1idHXLcaLETuKtB4
+        nR0QVZICDezvw0FsHGUcqzgYiioaLf9MgStEi9OMPgXVE3B5yH2IxEEge4L1exNl
+        n5MiRfFnYd2/C5Za5kJxf+gtuAK0IobpiGhbu9ssIGcg9N5/LZYJGLu4oU48lO+n
+        uUkVekgIxKPBX09bmuNZt7dtd+0yyCLrgQREy1lceRdTXEsEElYYLcPEU2KuQAGE
+        Ao49aY3Mvg9HJ3CPIqx4DqKSN/vhqpOe2bMs3eIw8QKBgQDg5EqgDTyfai15uZ8N
+        LQ92GyLeLdPrxRa4CR3JyED5AD3deJfgJgFvkU91+J3SqErUvxBYNNL9wxtRkIc3
+        Ts0G1qYh9ztqGuH+blSF/SGpMGvBgW4H5zxVeFVklxB7ZiA4HKUpk4bG134Vsgqx
+        YTX0Pkm1kezBfEY9hkj6Vy/heQKBgQDMjujfk/lbSoy8eLlt5FDVvw05LZWJqz6L
+        IT9ZkorRJAbRefUdhtc2IVngS7mhBEkPZCubViwTA0tTJImCvTEXVLiOkYxe9/zP
+        y9kVBzWelS1rGiIBPapd/WiGARzYsVpsEgV3IBsGlhSuWprhcmWiG/EM4CrSkswF
+        z1HLlDRCbwKBgQCJ2QUxA8wT/vYu9atbXTJr94gw3bBXhTA+0D+1Do1c01wYY7Hc
+        UA9zPoORUToUBNoRe6feGUr3Bt+46DkpmqCrv2iHy05c5GuAFEq08orudOKn8tjp
+        +UAPN7pH9RzCNsArBMvsJyRmv3HmhIJvZaG3u3Jc3DxeAPng/m2/HTAZKQKBgFaj
+        DHRtKsaEi5jjlL27XpU5BrO538TgF2w716XrUAoGNTERc0RfMNVHSNabm/Jba0ou
+        hd2ToLUoxwVeyzLpSFp2UnhnoskyRQwJbVbfp9ETo5niBpb59Cc8xcFDxWDttLti
+        4peyrF+cvwOdck2b8vm21eA7LUfkTq8DQMR1b7DXAoGAOWsdtkxVuJC/RXM2KbvU
+        yQ3ZYMGwDE3Ui8v/eQCs3/Erm3++E52/R0p5mTgo/pqGJzaufNBIcFJp/kb7im4e
+        u1OWFur3HtvyEe85l+nstmoGWvMRemhKtuIPQjfNDf/zO3m4xByzRZEw3j8fdVWc
+        3Yz9eK2ZQaZWAxPj0icZ46Y=
+        -----END PRIVATE KEY-----
 
 volumes:
   static-content:
