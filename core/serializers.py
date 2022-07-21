@@ -14,6 +14,7 @@ from rest_framework import serializers
 from oauth2_provider.models import AccessToken, Application, RefreshToken
 
 from core.email_utils import send_email, send_email_body
+from core.avatar_utils import upload_to_cloud, delete_from_cloud
 
 from core.models import CoreUser, CoreGroup, EmailTemplate, LogicModule, Organization, PERMISSIONS_ORG_ADMIN, \
     TEMPLATE_RESET_PASSWORD, PERMISSIONS_VIEW_ONLY, Subscriber
@@ -184,14 +185,24 @@ class CoreUserProfileSerializer(serializers.Serializer):
     contact_info = serializers.CharField(required=False)
     password = serializers.CharField(required=False)
     organization_name = serializers.CharField(required=False)
+    avatar_url = serializers.CharField(required=False)
+    file = serializers.ListField(child=serializers.FileField(), write_only=True)
 
     class Meta:
         model = CoreUser
-        fields = ('first_name', 'last_name', 'password', 'title', 'contact_info', 'organization_name')
+        fields = ('first_name', 'last_name', 'password', 'title', 'contact_info', 'organization_name', 'avatar_url')
 
     def update(self, instance, validated_data):
 
         organization_name = validated_data.pop('organization_name', None).lower()
+        files = validated_data.get('file')
+        if files and files[0]:
+            imported_file = files[0]
+            name = imported_file.name
+            validated_data['avatar_url'] = upload_to_cloud(imported_file, name)
+            if instance.avatar_url:
+                filename = str(instance.avatar_url).split('avatar/')[1]
+                delete_from_cloud(filename)
 
         name = Organization.objects.filter(name=organization_name).first()
         if name is not None:
@@ -202,6 +213,7 @@ class CoreUserProfileSerializer(serializers.Serializer):
         instance.last_name = validated_data.get('last_name', instance.last_name)
         instance.title = validated_data.get('title', instance.title)
         instance.contact_info = validated_data.get('contact_info', instance.contact_info)
+        instance.avatar_url = validated_data.get('avatar_url', instance.avatar_url)
         password = validated_data.get('password', None)
         if password is not None:
             instance.set_password(password)

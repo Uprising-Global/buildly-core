@@ -79,6 +79,12 @@ services:
       DEFAULT_FROM_EMAIL: "admin@buildly.io"
       RESETPASS_CONFIRM_URL_PATH: "reset-password-confirm/"
       SELF_SSL_BUNDLE: "/code/self-ssl-bundle.crt"
+      GCP_PROJECT: 'uprising-web'
+      GCP_CLIENT_ID: '114637864365214335773'
+      GCP_CLOUD_STORAGE: 'uprising-dev-bucket'
+      GCP_CLIENT_EMAIL: 'universal@uprising-web.iam.gserviceaccount.com'
+      GCP_PRIVATE_KEY_ID: '6dbde3b169294b9b16af1f85de7894c237b57c10'
+      GCP_PRIVATE_KEY: 'Put private key here'
 
 volumes:
   static-content:
