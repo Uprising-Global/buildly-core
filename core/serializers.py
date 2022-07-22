@@ -99,7 +99,7 @@ class CoreUserSerializer(serializers.ModelSerializer):
         model = CoreUser
         fields = ('id', 'core_user_uuid', 'first_name', 'last_name', 'email', 'username', 'is_active',
                   'title', 'contact_info', 'privacy_disclaimer_accepted', 'organization', 'core_groups',
-                  'invitation_token')
+                  'invitation_token', 'avatar_url', 'about_me')
         read_only_fields = ('core_user_uuid', 'organization',)
         depth = 1
 
@@ -187,10 +187,12 @@ class CoreUserProfileSerializer(serializers.Serializer):
     organization_name = serializers.CharField(required=False)
     avatar_url = serializers.CharField(required=False)
     file = serializers.ListField(child=serializers.FileField(), write_only=True)
+    about_me = serializers.CharField(required=False)
 
     class Meta:
         model = CoreUser
-        fields = ('first_name', 'last_name', 'password', 'title', 'contact_info', 'organization_name', 'avatar_url')
+        fields = ('first_name', 'last_name', 'password', 'title', 'contact_info', 'organization_name',
+                  'avatar_url', 'about_me')
 
     def update(self, instance, validated_data):
 
@@ -214,6 +216,7 @@ class CoreUserProfileSerializer(serializers.Serializer):
         instance.title = validated_data.get('title', instance.title)
         instance.contact_info = validated_data.get('contact_info', instance.contact_info)
         instance.avatar_url = validated_data.get('avatar_url', instance.avatar_url)
+        instance.about_me = validated_data.get('about_me', instance.about_me)
         password = validated_data.get('password', None)
         if password is not None:
             instance.set_password(password)

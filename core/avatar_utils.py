@@ -3,6 +3,7 @@ from django.conf import settings
 from google.cloud import storage
 from google.oauth2 import service_account
 
+
 def upload_to_cloud(imported_file, filename):
     # Use service account credentials to authenticate Cloud Storage
     credentials = service_account.Credentials.from_service_account_info(

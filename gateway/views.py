@@ -3,10 +3,9 @@ import logging
 from django.http import HttpResponse
 from rest_framework import views
 from rest_framework.request import Request
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import AllowAny
 
 from gateway import exceptions
-from gateway.permissions import AllowLogicModuleGroup
 from gateway.request import GatewayRequest, AsyncGatewayRequest
 
 

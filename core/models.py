@@ -179,6 +179,7 @@ class CoreUser(AbstractUser):
     create_date = models.DateTimeField(default=timezone.now)
     edit_date = models.DateTimeField(null=True, blank=True)
     avatar_url = models.CharField(null=True, blank=True, max_length=1023, verbose_name='User avatar')
+    about_me = models.CharField(null=True, blank=True, max_length=1023)
 
     class Meta:
         ordering = ('first_name',)
