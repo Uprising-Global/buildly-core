@@ -5,7 +5,6 @@ from django.db import transaction
 from django.shortcuts import get_object_or_404
 from rest_framework import mixins, permissions, status, viewsets
 from rest_framework.decorators import action
-from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 import django_filters
 import jwt
@@ -265,7 +264,7 @@ class CoreUserViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin,
     queryset = CoreUser.objects.all()
     permission_classes = (AllowAuthenticatedRead,)
 
-    @action(detail=True, methods=['patch'], name='Update Profile', parser_classes=(MultiPartParser, FormParser))
+    @action(detail=True, methods=['patch'], name='Update Profile')
     def update_profile(self, request, pk=None, *args, **kwargs):
         """
         Update a user Profile
